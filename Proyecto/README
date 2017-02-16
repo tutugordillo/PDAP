@@ -1,0 +1,81 @@
+La carpeta del proyecto "ProyectoFinal" contiene dos directorios:
+"SinOTP" y "ConOTP". Cada una de ellas contiene el código
+correspondiente a la práctica. La secuencia a ejecutar para su
+compilación es la que sigue:
+
+c(p2p),c(server),c(userp2p),c(lector),c(download),c(downloadseed),c(seed).
+
+Dentro de cada una de las subcarpetas anteriores existe un directorio
+"principal" que será el PATH que hay que mandar para comenzar la
+ejecución de la práctica y contiene el ejemplo utilizado. El ejemplo
+utilizado en ambas versiones es el mismo (aunque cada subcarpeta tiene
+su propio directorio de ejemplo creado). El archivo de configuración
+es análogo en ambos casos y es similar al existente en el enunciado de
+la práctica pero creando únicamente 4 usuarios y un máximo de dos
+procesos seed y dos procesos download. Además el tamaño del chunk es
+3.
+
+------------------------
+DESCRIPCIÓN DEL EJEMPLO
+------------------------
+Para llevar a cabo la práctica se han creado 3 archivos que serán los
+que serán transmitidos entre los usuarios: "prueba", "secuencial" y "concurrencia".
+
+Se crearán 4 usuarios. El usuario 0, 1 y 2 ya se encuentran creados
+mientras que el usuario 3 será creado por la práctica.
+
+**El usuario 0 tiene en su directorio personal(User_0) tanto la carpeta
+  downloading y la carpeta completed creadas. En la carpeta completed
+  no tendrá ningún archivo y en la carpeta downloading los
+  directorios vacíos concurrencia_dir, prueba_dir y secuencial_dir respectivamente. El
+  archivo files.txt será creado por el proyecto. Recibirá tres mensajes
+  download (uno por cada línea de datos) y se creará tres procesos
+  download pero al estar el límite de seed en 2, no encontrará
+  suficientes seed para descargar los 3 archivos y solo podrá ser
+  descargado uno de ellos.
+
+  Tras la ejecución tendrá los tres archivos en el directorio completed,
+  el directorio downloading estará vacío y el archivo files.txt tendrá
+  tanto prueba como concurrencia.
+
+** El usuario 1 tendrá el archivo "prueba" en completed y el
+   directorio concurrencia_dir dentro de downloading. Además no tiene
+   el archivo files creado.
+
+   Así el usuario 1 actuará de seed para enviar el archivo "prueba" y
+   pedirá el archivo "concurrencia". Recibirá un mensaje download y
+   creará un único proceso download y un único proceso seed ya que el
+   archivo concurrencia solo lo tendrá el usuario2.
+
+   Tras la ejecución el usuario 1 tendrá en su directorio completed el
+   archivo "prueba" y "concurrencia", el directorio downloading vacío y
+   el fichero files.txt con una única línea con concurrencia.
+
+** El usuario 2 tendrá en la carpeta completed los archivos "prueba" y
+   "concurrencia" y en la carpeta downloading el directorio
+   secuencial_dir. Además el fichero files.txt en este caso estará
+   creado pero vacío.
+
+   En este caso el único que actuará de seed será el usuario 0. Tras
+   la ejecución tendrá el downloading vacío y los archivos "prueba" y
+   "concurrencia" y "secuencial" en la carpeta completed. Además el
+   archivo files.txt contendrá la entrada secuencial.
+
+** EL usuario 3 no estará creado y por tanto no intervendrá en el
+   funcionamiento. El proyecto únicamente generará un nuevo directorio
+   User_3 (no existente inicialmente) con sus directorios downloading,
+   completed y su archivo files.txt vacio.
+
+
+----------
+EJECUCIÓN
+----------
+Para ejecutar el proyecto hay que posicionarse en el directorio
+"SinOTP" (o "ConOTP") y una vez en el mismo lanzar erlang. Tras ello:
+
+c(p2p),c(server),c(userp2p),c(lector),c(download),c(downloadseed),c(seed).
+p2p:start("./principal/").
+
+Además el procesos server se encuentra registrado y existe una
+interfaz finalizar que envía al servidor el mensaje close y lo reenvía
+al resto de procesos. 
