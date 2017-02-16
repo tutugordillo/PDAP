@@ -1,0 +1,25 @@
+Alumno: Pablo Gordillo
+
+1- Porque el segundo elemento de B no está definido como una lista y por tanto el comando hd(E) falla al intentar devolver la cabeza de un elmento(E) que no es una lista.
+
+2- {_,X}=io:read("Introduce un numero:"),{_,Y}=io:read("Introduce el segundo número:"),X+Y. 
+
+3- S == lists:reverse(S).
+
+4- Rev=fun(X)-> X == lists:reverse(X) end .
+
+5- math:pow(element(3,C),2).
+
+6- {value,X} = lists:keysearch(square,1,L),Y=elements(3,X),math:pow(Y,2).
+
+7- {rectangle,P,X,X} = R,{square,P,X} .
+
+8- {circle,{TX,TY},R} = S1, {rectangle,{T2X,T2Y},LX,LY} = S2, ((T2X)=<(TX-R)) and ((T2X+LX)>=(TX+R)) and ((T2Y)>=(TY+R)) and ((T2Y-LY) =< (TY-R)) .  
+
+9- Cuadrado=fun(X)-> element(1,X) == square end.
+
+10- 
+Cuadrado: Ejercicio 9.
+Area=fun(X)->Y = math:pow(element(3,X),2) end. 
+
+Cs = fun(L)-> lists:map(Area,lists:filter(Cuadrado,L)) end.
